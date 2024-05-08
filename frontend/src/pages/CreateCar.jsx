@@ -121,7 +121,7 @@ const CreateCar = () => {
         JSON.stringify(localStorage.setItem('authToken', JSON.stringify(refreshedTokens)))
         const response = await createCar2(refreshedTokens.access, car, file)
         console.log('response', response)
-        navigate('/')
+        navigate('/home')
       } else {
         // dispatch(authActions.logout());
         navigate('/login')
@@ -190,7 +190,7 @@ const CreateCar = () => {
         setSuccess(`${response.name} file uploaded successfully`);
         setSuccess('Car created successfully');
         setTimeout(() => {
-          navigate('/');
+          navigate('/home');
         }, 3000);
       } else if (response.status === 'error') {
         setError(`${response.name} file upload failed.`);

@@ -34,7 +34,7 @@ const CarCard = ({ car }) => {
 
 
     return (
-        <Link to={`/cars/${car.id}`} style={{ textDecoration: 'none' }}>
+        <Link className='cad-wrap' to={`/cars/${car.id}`} style={{ textDecoration: 'none' }}>
             <div className="card car-card " style={{ width: "16rem" }}>
                 <img data-aos='slide-up' src={`http://localhost:8000/${car.img}`} className="card-img-top imgg" alt="..." />
                 <Flex gap="0" horizontal>
@@ -45,7 +45,7 @@ const CarCard = ({ car }) => {
                     <h5 className="card-title">{`${car.brand}  ${car.model}`}</h5>
                     <div className="card-text det">HP: <span>{car.power}</span></div>
                     <div className="card-text det">Color: <span>{car.color}</span></div>
-                    <div className="card-text det">Location: <span>{car.location + " " + car.city}</span></div>
+                    <div className="card-text det">Location: <span>{car.city}</span></div>
                     <div className="card-text det">Rate per hour: <span>{car.price}</span></div>
                 </div>
                 <div className="btncard">

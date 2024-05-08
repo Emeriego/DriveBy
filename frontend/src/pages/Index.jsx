@@ -79,7 +79,7 @@ const index = () => {
                 <p className="lead">We revolutionize transportation with our peer-to-peer car rental app. Easily rent vehicles from local owners, offering affordable and convenient options for short-term use. Seamlessly browse, book, and unlock cars, promoting sustainability and community sharing.</p>
                 <hr className="my-4" />
                 <p>Experience hassle-free travel with our intuitive and eco-conscious platform.</p>
-                <a className="btn btn-primary btn-lg" href="#" role="button">How it works</a>
+                <Link className="btn btn-primary btn-lg" to="/guide" role="button">How it works</Link>
             </div>
         </div>
 

@@ -13,7 +13,7 @@ const Guide = () => {
           <p>To find available cars, you can use the search feature in our app. Specify your desired location, date, and time to view a list of available cars.</p>
         </section>
         <section id="login" className="py-4">
-          <h2>2. Logging In</h2>
+          <h2>2. Logging In or Sign up</h2>
           <p>Before you can proceed with booking, you need to log in to your account. If you don't have an account yet, you can sign up for one easily.</p>
         </section>
         <section id="select-car" className="py-4">
@@ -24,18 +24,16 @@ const Guide = () => {
           <h2>4. Making a Booking</h2>
           <p>After selecting a car, choose your desired rental duration and proceed to book it. Make sure to review the booking details, including pickup and return locations.</p>
         </section>
-        <section id="acceptance" className="py-4">
-          <h2>5. Acceptance by Owner</h2>
-          <p>Once you've made a booking request, the car owner will review it and either accept or decline it. You'll receive a notification once the owner responds.</p>
-        </section>
         <section id="payment" className="py-4">
           <h2>6. Payment</h2>
-          <p>If the booking is accepted, you'll be prompted to make the payment. We offer secure payment options to ensure a smooth transaction.</p>
+          <p>We offer secure payment options to ensure a smooth transaction.</p>
         </section>
-        <section id="confirmation" className="py-4">
-          <h2>7. Confirmation of Payment</h2>
-          <p>After the payment is successfully processed, you'll receive a confirmation email and notification. You can also view the booking details in your account.</p>
+        <section id="acceptance and confirmation of payment" className="py-4">
+          <h2>5. Acceptance and Confirmation of Payment by car owner</h2>
+          <p>Once you've made a booking request, the car owner will review it and either accept or decline it. You'll receive a notification once the owner responds.</p>
         </section>
+        
+      
         <section id="completion" className="py-4">
           <h2>8. Completion of Deal</h2>
           <p>On the day of the rental, meet the car owner at the designated location to pick up the car. Conduct a walkthrough inspection to ensure the car's condition matches the listing.</p>

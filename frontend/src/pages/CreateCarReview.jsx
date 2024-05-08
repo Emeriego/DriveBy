@@ -66,7 +66,8 @@ const CreateCarReview = () => {
         // console.log('review2222:', tokens)
 
         const data = await postCarReview({ car: car_id, review, rating: value }, refreshedTokens.access)
-      console.log('review feedback:', data)
+        console.log('review feedback:', data)
+        // navigate('/dashboard')
       }
     }
     catch (err) {

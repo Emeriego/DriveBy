@@ -103,7 +103,7 @@ const Signup = () => {
       //   setIsLoading(false)
 
       // }, 10000)
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       // Handle any errors
       console.error('Error:', error);
@@ -135,7 +135,7 @@ const Signup = () => {
     try {
       const data = await addUserToDB(email, password, username, phone, address, firstname, lastname);
       setIsLoading(true)
-      setSuccess('Car created successfully')
+      setSuccess('Your account has been created successfully')
       setTimeout(() => {
         setIsLoading(false)
 

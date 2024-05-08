@@ -97,7 +97,7 @@ console.log('data', myData)
     <div className="form-container">
       <div className="left-pane">
         <div className="img-container">
-          <img src="./assets/van.webp" alt="" />
+          <img src="/assets/logo.png" alt="" />
         </div>
       </div>
       <div className='right-pane' >

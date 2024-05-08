@@ -13,6 +13,7 @@ import { refreshToken } from '../utils/auth';
 import { set } from 'date-fns';
 import DefaultImg from './assets/default.jpeg';
 import BookingModal from '../components/BookingModal';
+import { SendOutlined } from '@ant-design/icons';
 // import './profile.css';
 
 
@@ -25,6 +26,7 @@ const Dashboard = () => {
   const [showBookings, setShowBookings] = useState(true)
   const [showPostings, setShowPostings] = useState(true)
   const [messages, setMessages] = useState([])
+  const [sentMessages, setSentMessages] = useState([])
   const [bookings, setBookings] = useState([])
   const [book, setBook] = useState([])
   const [postings, setPostings] = useState([])
@@ -38,6 +40,7 @@ const Dashboard = () => {
 
   const loggedInDetail = useSelector(state => state.auth.loggedInDetail)
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const [showSentMessages, setShowSentMessages] = useState(true)
   // const { firstname, lastname, email, username, address} = loggedInDetail
   // console.log("from dashboard", loggedInDetail)
 
@@ -156,6 +159,7 @@ const Dashboard = () => {
           await getUserMessages(refreshedTokens.access)
           await getUserBookings(refreshedTokens.access)
           await getUserPostings(refreshedTokens.access)
+          await getUserSentMessages(refreshedTokens.access)
         }
       } catch (error) {
         console.log('error', error)
@@ -417,22 +421,44 @@ const Dashboard = () => {
           }
         })
 
-      let data = res.data.filter(message => {
-        // console.log("message:", message);
-        // console.log("receiver:", message.receiver);
-        // console.log("sender:", message.sender);
-        return message.receiver.username === loggedInDetail.username || message.sender.username === loggedInDetail.username;
+      let recieved = res.data.filter(message => {
+       
+        return (message.receiver.username === loggedInDetail.username);
       });
-      console.log("Filtered data:", data);
+     
       // console.log('messages', res.data)
       setLoading(false)
-      setMessages(data)
+      setMessages(recieved)
     } catch (error) {
       console.log(error)
       setLoading(false)
     }
   }
 
+
+  const getUserSentMessages = async (access) => {
+    try {
+      setLoading(true)
+      const res = await axios.get('http://localhost:8000/api/messages/sent/',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access}`
+          }
+        })
+
+   
+      let sent = res.data.filter(message => {
+        return (message.sender.username === loggedInDetail.username);
+      });
+      // console.log('messages', res.data)
+      setLoading(false)
+      setSentMessages(sent)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
   const navToUserReview = (bookingId) => {
     navigate(`/review/${bookingId}/create`)
   }
@@ -496,7 +522,7 @@ const Dashboard = () => {
       <Row>
         <Col className='d-col-left msgs' span={20}>
           {
-            showMessages &&
+            showMessages && 
 
             (messages.length > 0 ? messages.map((message, index) => {
               return (
@@ -515,11 +541,11 @@ const Dashboard = () => {
               )
             }) : <div className="card" style={{ width: "80%" }}>
               <div className="card-header">
-                Message
+                Received Messages
               </div>
               <div className="card-body">
                 <blockquote className="blockquote mb-0">
-                  <p>No Messages</p>
+                  <p>Your inbox is empty</p>
                   {/* <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> */}
                 </blockquote>
 
@@ -538,6 +564,53 @@ const Dashboard = () => {
           </Button>
         </Col>
       </Row>
+      <Divider orientation="left"><span className='d-toggle' onClick={() => setShowSentMessages(prev => !prev)}>{showSentMessages ? "Hide Sent Messages" : "Show Sent Messages"}</span><SendOutlined /></Divider>
+      <Row>
+        <Col className='d-col-left msgs' span={20}>
+          {
+            showSentMessages && 
+
+            (sentMessages.length > 0 ? sentMessages.map((message, index) => {
+              return (
+                <div key={index} className="card" style={{ width: "80%" }}>
+                  <div onClick={() => setShowMsgDetail(prev => !prev)} className="card-header">
+                    To: {message.receiver.username}
+                  </div>
+                  {showMsgDetail && <div className="card-body">
+                    <p>{message.message}</p>
+
+                    <blockquote className="blockquote mb-0">
+                      {/* {message.sender} */}
+                    </blockquote>
+                  </div>}
+                </div>
+              )
+            }) : <div className="card" style={{ width: "80%" }}>
+              <div className="card-header">
+                Sent Messages
+              </div>
+              <div className="card-body">
+                <blockquote className="blockquote mb-0">
+                  <p>You have not sent any Messages</p>
+                  {/* <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> */}
+                </blockquote>
+
+              </div>
+            </div>)
+
+          }
+
+
+
+
+        </Col>
+        <Col span={4}>
+          <Button onClick={() => { navigate('/messages/create') }} className='d-btn' type="primary" size="small">
+            Send a Message
+          </Button>
+        </Col>
+      </Row>
+      
       <Divider orientation="left"><span className='d-toggle' onClick={() => setShowBookings(prev => !prev)}>{showBookings ? "Hide Bookings" : "Show Bookings"}</span><BookOutlined /></Divider>
 
       <Row>
@@ -700,13 +773,13 @@ const Dashboard = () => {
                   }
                   {
                     booking.status === 'Completed' && booking.car.user.id === loggedInDetail.id && <div>
-                      <Button onClick={() => handleReview(booking.user.id)} size='small'>Review User</Button>
+                      <Button onClick={() => navToUserReview(booking.user.id)} size='small'>Review User</Button>
 
                     </div>
                   }
                          {
                     booking.status === 'Canceled' && booking.car.user.id === loggedInDetail.id && <div>
-                      <Button onClick={() => handleReview(booking.user.id)} size='small'>Review User</Button>
+                      <Button onClick={() => navToUserReview(booking.user.id)} size='small'>Review User</Button>
 
                     </div>
                   }

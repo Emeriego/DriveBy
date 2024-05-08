@@ -1,0 +1,105 @@
+Setting up a web server to serve your React-Django application involves several steps, including configuring your server environment, installing necessary software, setting up your application, and securing your server with a firewall like UFW (Uncomplicated Firewall). Here's a step-by-step guide:
+
+1. **Prepare Your Server**:
+   - Choose a cloud provider like AWS, DigitalOcean, or Linode, and spin up a virtual private server (VPS) running a Linux distribution like Ubuntu.
+
+2. **Update System Packages**:
+   - SSH into your server and update the system packages to ensure you have the latest security patches and updates.
+     ```
+     sudo apt update
+     sudo apt upgrade
+     ```
+
+3. **Install Necessary Software**:
+   - You'll need to install Nginx (a web server), Gunicorn (a WSGI HTTP server for Django), Node.js, and npm (for React).
+     ```
+     sudo apt install nginx python3-pip python3-venv python3-dev build-essential nodejs npm
+     sudo npm install -g npm@latest
+     ```
+
+4. **Set Up Django**:
+   - Create a virtual environment for your Django project, activate it, and install Django and other dependencies.
+     ```
+     mkdir ~/project
+     cd ~/project
+     python3 -m venv env
+     source env/bin/activate
+     pip install django gunicorn django-cors-headers
+     ```
+
+5. **Set Up React**:
+   - Initialize a new React project inside your Django project directory.
+     ```
+     npx create-react-app frontend
+     ```
+
+6. **Configure Django**:
+   - Set up your Django project following the standard procedures. Ensure your `ALLOWED_HOSTS` in `settings.py` includes your server's IP or domain.
+   - Set up static and media file serving in Django's `settings.py` for production.
+
+7. **Configure Nginx**:
+   - Configure Nginx as a reverse proxy to forward requests to Gunicorn and serve static files.
+     - Create a new Nginx server block configuration file:
+       ```
+       sudo nano /etc/nginx/sites-available/myproject
+       ```
+     - Configure Nginx to forward requests to Gunicorn:
+       ```
+       server {
+           listen 80;
+           server_name your_domain.com www.your_domain.com;
+
+           location = /favicon.ico { access_log off; log_not_found off; }
+           location /static/ {
+               root /path/to/your/project;
+           }
+
+           location / {
+               include proxy_params;
+               proxy_pass http://unix:/path/to/your/project/yourproject.sock;
+           }
+       }
+       ```
+     - Create a symbolic link to enable the Nginx server block:
+       ```
+       sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
+       ```
+     - Test Nginx configuration:
+       ```
+       sudo nginx -t
+       ```
+     - Restart Nginx for changes to take effect:
+       ```
+       sudo systemctl restart nginx
+       ```
+
+8. **Set Up UFW (Uncomplicated Firewall)**:
+   - Configure UFW to allow traffic on port 80 (HTTP) and 443 (HTTPS, if you have SSL enabled) and deny all other incoming traffic:
+     ```
+     sudo ufw allow 'Nginx Full'
+     sudo ufw enable
+     ```
+
+9. **Deploy Your Application**:
+   - Run Gunicorn to start your Django application:
+     ```
+     cd ~/project
+     source env/bin/activate
+     gunicorn --workers 3 --bind unix:/path/to/your/project/yourproject.sock yourproject.wsgi:application
+     ```
+
+10. **Build and Deploy React App**:
+    - Build your React app and copy the build files to your Django `static` directory.
+      ```
+      cd ~/project/frontend
+      npm run build
+      cp -r build/* ../static/
+      ```
+
+11. **Restart Services**:
+    - Restart Gunicorn and Nginx for changes to take effect:
+      ```
+      sudo systemctl restart nginx
+      ```
+
+Your React-Django application should now be up and running on your web server. Make sure to test it thoroughly to ensure everything is working as expected.

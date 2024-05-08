@@ -44,13 +44,14 @@ const Login = () => {
     } catch (error) {
       // Handle any errors
       console.error('Error:', error);
+      navigate('/login')
       // You might want to display an error message to the user
     }
   };
 
 
   return (
-    <div className="form-container" style={{height: '80vh'}}>
+    <div className="form-container">
       <div className="right-pane">
         <div className="img-container">
           <img data-aos='slide-right' src="./assets/logo.png" alt="" />

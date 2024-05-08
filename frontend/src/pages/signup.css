@@ -1,31 +1,35 @@
-.form-container{
+.form-container {
   width: 80%;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   background-color: white;
   /* gap: 15px; */
   margin-top: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
-.left-pane{
+
+.left-pane {
   display: flex;
   width: 50%;
-  height: 90vh;
+  height: auto;
   align-items: center;
   justify-content: center;
   /* flex-direction: column; */
   justify-content: space-around;
   gap: 15px;
   /* background-color: black; */
+  padding: 2rem;
 }
+
 .right-pane {
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   justify-content: center;
   align-items: center;
   height: auto;
@@ -34,7 +38,8 @@
   margin-right: 0rem;
   padding: 2rem;
 }
-.frm-rw{
+
+.frm-rw {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -42,7 +47,8 @@
   margin-bottom: 15px;
   width: 100%;
 }
-.frm-rw2{
+
+.frm-rw2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -54,20 +60,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* Ensure the image doesn't overflow */
+  height: 50%;
+  width: 50%%;
+  overflow: hidden;
+  /* Ensure the image doesn't overflow */
   object-fit: cover;
 }
 
 .img-container img {
-  width: auto; /* Let the width adjust automatically */
-  height: auto; /* Let the height adjust automatically */
-  max-width: 100%; /* Ensure the image doesn't exceed the container width */
-  max-height: 100%; /* Ensure the image doesn't exceed the container height */
+  width: 80%;
+  /* Let the width adjust automatically */
+  height: 80%;
+  /* Let the height adjust automatically */
+  max-width: 100%;
+  /* Ensure the image doesn't exceed the container width */
+  max-height: 100%;
+  /* Ensure the image doesn't exceed the container height */
   /* object-fit: cover; Maintain aspect ratio and cover the container */
 }
-.google-login{
+
+.google-login {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -76,7 +88,7 @@
   margin-left: 20px;
 }
 
-.search-btn{
+.search-btn {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -84,21 +96,23 @@
   /* background-color: whitesmoke !important; */
   color: rgb(228, 225, 225) !important;
 }
-.msg{
-  width:auto;
+
+.msg {
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
   margin-top: 0.5rem;
 }
-.error{
+
+.error {
   color: red;
   font-size: 0.8rem;
   margin-top: 0.5rem;
 }
 
-.success{
+.success {
   color: green;
   font-size: 0.8rem;
   margin-top: 0.5rem;
