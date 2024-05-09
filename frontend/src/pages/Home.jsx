@@ -154,7 +154,7 @@ const Home = () => {
                 <Col span={16}><span>
                     <RangePicker className='date-picker' showTime={{ format: 'HH:mm' }} format="DD MM YYYY HH:mm" onOk={SetTimeSlot} />
                 </span></Col>
-                <Col span={4}><button className=' search-btn' onClick={() => checkAvailability(to, from)}>Filter Available Cars</button></Col>
+                <Col span={4}><button className=' search-btn2' style={{backgroundColor: 'transparent', color: 'white'}} onClick={() => checkAvailability(to, from)}>Filter</button></Col>
             </div>
             {
                 isFiltered ? <div className='filtered-info'> <h6>Filter - {filteredCars.length} cars are available for booking for the selected period.</h6></div> : <div> <h6></h6></div>

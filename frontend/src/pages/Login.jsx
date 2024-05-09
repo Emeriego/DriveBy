@@ -1,7 +1,7 @@
 import React from 'react'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
+import { Input, message } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const successMsg = (msg) => {
+    messageApi.open({
+      type: 'success',
+      content: msg,
+    });
+  };
+
+  const errorMsg = (msg) => {
+    messageApi.open({
+      type: 'error',
+      content: msg,
+    });
+  };
+
+
+
 
   const getEmail = (e) => {
     const email = e.target.value;
@@ -40,10 +59,14 @@ const Login = () => {
       localStorage.setItem('authToken', JSON.stringify(tokens));
       dispatch(authActions.login(tokens));
       // Navigate after successful login
+      successMsg('Login Successful')
+      setTimeout(() => {
       navigate('/dashboard');
+      }, 3000);
     } catch (error) {
       // Handle any errors
       console.error('Error:', error);
+      errorMsg('Login Failed - Invalid Credentials')
       navigate('/login')
       // You might want to display an error message to the user
     }
@@ -52,6 +75,7 @@ const Login = () => {
 
   return (
     <div className="form-container">
+      {contextHolder}
       <div className="right-pane">
         <div className="img-container">
           <img data-aos='slide-right' src="./assets/logo.png" alt="" />
