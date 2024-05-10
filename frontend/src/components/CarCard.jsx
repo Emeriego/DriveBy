@@ -36,7 +36,7 @@ const CarCard = ({ car }) => {
     return (
         <Link className='cad-wrap' to={`/cars/${car.id}`} style={{ textDecoration: 'none' }}>
             <div className="card car-card " style={{ width: "16rem" }}>
-                <img data-aos='slide-up' src={`http://api.driveby.charwin.tech/${car.img}`} className="card-img-top imgg" alt="..." />
+                <img data-aos='slide-up' src={`http://api.driveby.charwin.tech${car.img}`} className="card-img-top imgg" alt="..." />
                 <Flex gap="0" horizontal>
                     <Rate tooltips={desc} value={car.rating} className='rate' disabled/>
                     {car.rating !== 0 ? <span className='rate2'>{`${car.numReviews} reviews`}</span> : <small className='rate'> No reviews</small> }

@@ -73,7 +73,7 @@ const Car = () => {
             // width={500}
             style={{ width: '100%', height: '100%' }}
             // src={`./assets/${car.img}`}
-            src={`http://api.driveby.charwin.tech/${car.img}`}          />
+            src={`http://api.driveby.charwin.tech${car.img}`}          />
         </div>
 
       </div>
