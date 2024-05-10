@@ -39,7 +39,7 @@ const CreateCarReview = () => {
 
   const getCarById = async (car_id) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/cars/${car_id}`)
+      const response = await axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
       const data = await response.data
       setCar(data)
     }

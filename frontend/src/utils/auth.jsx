@@ -166,7 +166,7 @@ const setRefreshTokens = async (dispatch, authActions) => {
 //     console.log("from logout: ", loggedInToken)
 //     // try {
 //     //   // Make a POST request to the logout endpoint
-//     //   const response = await axios.post('http://localhost:8000/logout', {}, {
+//     //   const response = await axios.post('http://api.driveby.charwin.tech/logout', {}, {
 //     //     headers: {
 //     //       Authorization: `Bearer ${loggedInToken}`
 //     //     }

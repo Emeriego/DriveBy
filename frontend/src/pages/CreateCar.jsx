@@ -46,7 +46,7 @@ const CreateCar = () => {
   //   return (
   //     <Upload
   //       name="file"
-  //       action="http://localhost:8000/api/upload"
+  //       action="http://api.driveby.charwin.tech/api/upload"
   //       headers={{
   //         Authorization: 'Bearer ' + String(loggedInToken)
   //       }}
@@ -77,7 +77,7 @@ const CreateCar = () => {
   // const createCar = async (access) => {
   //   try {
   //     // const tokens = JSON.parse(localStorage.getItem('authToken'))
-  //     const response = await fetch('http://localhost:8000/api/cars/create/', {
+  //     const response = await fetch('http://api.driveby.charwin.tech/api/cars/create/', {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const CreateCar = () => {
       if (file) {
         formData.append('image', file);
       }
-      const response = await fetch('http://localhost:8000/api/cars/create/', {
+      const response = await fetch('http://api.driveby.charwin.tech/api/cars/create/', {
         method: 'POST',
         headers: {
           'Authorization': 'Bearer ' + String(access)
@@ -206,7 +206,7 @@ const CreateCar = () => {
 
   // const props = {
   //   name: 'file',
-  //   action: 'http://localhost:8000/api/cars/create/', // Change the action URL to your Django backend endpoint for creating cars
+  //   action: 'http://api.driveby.charwin.tech/api/cars/create/', // Change the action URL to your Django backend endpoint for creating cars
   //   headers: {
   //     Authorization: `Bearer ${loggedInToken}`,
   //   },

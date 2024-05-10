@@ -70,7 +70,7 @@ const Dashboard = () => {
   // const getUserMessages = async (access) => {
   //   try {
   //     setLoading(true)
-  //     const res = await axios.get('http://localhost:8000/api/messages', {
+  //     const res = await axios.get('http://api.driveby.charwin.tech/api/messages', {
   //       headers: {
   //         'Content-Type': 'application/json',
   //         'Authorization': `Bearer ${access}`
@@ -87,7 +87,7 @@ const Dashboard = () => {
   //   }
   // }
   const getCarBookings = (car) => {
-    return axios.get(`http://localhost:8000/api/bookings/${car}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/bookings/${car}`)
       .then((response) => {
         setCarBookings(response.data)
         // dispatch(bookingActions.fetchCarBookings(response.data));
@@ -105,7 +105,7 @@ const Dashboard = () => {
   const getUserBookings = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://localhost:8000/api/bookings/user/',
+      const res = await axios.get('http://api.driveby.charwin.tech/api/bookings/user/',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const Dashboard = () => {
   const getUserPostings = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://localhost:8000/api/cars/',
+      const res = await axios.get('http://api.driveby.charwin.tech/api/cars/',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ const Dashboard = () => {
 
   const getBookingById = async (bookingId) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/bookings/${bookingId}/booking/`)
+      const response = await axios.get(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/booking/`)
       return await response.data
       // setCar(data)
     }
@@ -200,7 +200,7 @@ const Dashboard = () => {
   const confirmBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:8000/api/bookings/${bookingId}/confirm/`,
+      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/confirm/`,
         {
           method: 'POST',
           headers: {
@@ -220,7 +220,7 @@ const Dashboard = () => {
   const completeBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:8000/api/bookings/${bookingId}/complete/`,
+      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/complete/`,
         {
           method: 'POST',
           headers: {
@@ -241,7 +241,7 @@ const Dashboard = () => {
     console.log('searching for refteshed token:', access)
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:8000/api/bookings/${bookingId}/reject/`,
+      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/reject/`,
         {
           method: 'POST',
           headers: {
@@ -260,7 +260,7 @@ const Dashboard = () => {
   const cancelBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:8000/api/bookings/${bookingId}/cancel/`,
+      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/cancel/`,
         {
           method: 'POST',
           headers: {
@@ -413,7 +413,7 @@ const Dashboard = () => {
   const getUserMessages = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://localhost:8000/api/messages/',
+      const res = await axios.get('http://api.driveby.charwin.tech/api/messages/',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -439,7 +439,7 @@ const Dashboard = () => {
   const getUserSentMessages = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://localhost:8000/api/messages/sent/',
+      const res = await axios.get('http://api.driveby.charwin.tech/api/messages/sent/',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -471,7 +471,7 @@ const Dashboard = () => {
   //   console.log('searching for refteshed token:', access)
   //   try {
   //     setLoading(true)
-  //     const res = await axios.post(`http://localhost:8000/api/bookings/${bookingId}/cancel/`,
+  //     const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/cancel/`,
   //       {
   //         method: 'POST',
   //         headers: {

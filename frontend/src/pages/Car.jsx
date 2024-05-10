@@ -32,7 +32,7 @@ const Car = () => {
   );
 
   const getCar = () => {
-    return axios.get(`http://localhost:8000/api/cars/${car_id}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
       .then((response) => {
         dispatch(carActions.fetchSelectedCar(response.data));
         setCar(response.data);
@@ -73,7 +73,7 @@ const Car = () => {
             // width={500}
             style={{ width: '100%', height: '100%' }}
             // src={`./assets/${car.img}`}
-            src={`http://localhost:8000/${car.img}`}          />
+            src={`http://api.driveby.charwin.tech/${car.img}`}          />
         </div>
 
       </div>

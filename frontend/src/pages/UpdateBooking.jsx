@@ -50,7 +50,7 @@ const UpdateBooking = () => {
   );
 
   const getCar = () => {
-    return axios.get(`http://localhost:8000/api/cars/${car_id}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
       .then((response) => {
         dispatch(carActions.fetchSelectedCar(response.data));
         setCar(response.data);
@@ -73,7 +73,7 @@ const UpdateBooking = () => {
   }
 
   const getBookings = () => {
-    return axios.get(`http://localhost:8000/api/bookings/${car_id}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/bookings/${car_id}`)
       .then((response) => {
         dispatch(bookingActions.fetchCarBookings(response.data));
         console.log("from getBookings", response.data)
@@ -182,7 +182,7 @@ const UpdateBooking = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`http://localhost:8000/api/cars/book/${car_id}/`, {
+      const response = await axios.post(`http://api.driveby.charwin.tech/api/cars/book/${car_id}/`, {
         car_id: car_id,
         startDate: from,
         endDate: to,

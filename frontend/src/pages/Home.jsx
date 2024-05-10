@@ -28,7 +28,7 @@ const Home = () => {
     const [isFiltered, setIsFiltered] = React.useState(false);
 
     const getAllCars = () => {
-        return axios.get("http://localhost:8000/api/cars/")
+        return axios.get("http://api.driveby.charwin.tech/api/cars/")
             .then((response) => {
                 dispatch(carActions.fetchall(response.data));
                 // console.log(response.data)
@@ -49,7 +49,7 @@ const Home = () => {
     }
 
     const getBookings = () => {
-        return axios.get(`http://localhost:8000/api/bookings/`)
+        return axios.get(`http://api.driveby.charwin.tech/api/bookings/`)
             .then((response) => {
                 dispatch(bookingActions.fetchAllBookings(response.data));
                 console.log("from getBookings", response.data)

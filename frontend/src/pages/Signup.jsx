@@ -70,7 +70,7 @@ const Signup = () => {
 
 
   const addUserToDB = async (email, password, username, phone, address, firstname, lastname) => {
-    const response = await fetch('http://localhost:8000/api/users/register/', {
+    const response = await fetch('http://api.driveby.charwin.tech/api/users/register/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

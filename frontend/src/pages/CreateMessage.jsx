@@ -39,7 +39,7 @@ const CreateMessage = () => {
     // console.log('searching for refteshed token:', access)
     try {
       // setLoading(true)
-      const res = await axios.post(`http://localhost:8000/api/messages/create/`, JSON.stringify(myData),
+      const res = await axios.post(`http://api.driveby.charwin.tech/api/messages/create/`, JSON.stringify(myData),
         {
           headers: {
             'Content-Type': 'application/json',

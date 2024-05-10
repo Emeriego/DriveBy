@@ -4,7 +4,7 @@ import { reviewActions } from '../store'
 
 const getAllUserReviews = async () => {    
     try {
-        const response = await axios.get('http://localhost:8000/api/reviews/allusers/')
+        const response = await axios.get('http://api.driveby.charwin.tech/api/reviews/allusers/')
         return response.data
     }
     catch (error) {
@@ -55,7 +55,7 @@ const userReviews = async (user) => {
 
 const getAllCarReviews = async () => {
     try {
-        const response = await axios.get('http://localhost:8000/api/reviews/allcars/')
+        const response = await axios.get('http://api.driveby.charwin.tech/api/reviews/allcars/')
         return response.data
     }
     catch (error) {
@@ -68,7 +68,7 @@ const carRating = async (car) => {
 
     try {
         console.log('car-rated',car)
-        const carReviews = await axios.get(`http://localhost:8000/api/reviews/car/${car}/`)
+        const carReviews = await axios.get(`http://api.driveby.charwin.tech/api/reviews/car/${car}/`)
         return calculateRating(carReviews.data)
     }
     catch (error) {
@@ -93,7 +93,7 @@ const carReviews = async (car) => {
 const postCarReview = async (review, access) => {
     try {
         // console.log('before posting review at utilskkkkkkkkk',review, access)
-        const response = await axios.post('http://localhost:8000/api/cars/review/create/', JSON.stringify(review),
+        const response = await axios.post('http://api.driveby.charwin.tech/api/cars/review/create/', JSON.stringify(review),
             { headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${access}` 
@@ -110,7 +110,7 @@ const postCarReview = async (review, access) => {
 
 const postUserReview = async (review) => {
     try {
-        const response = await axios.post('http://localhost:8000/reviews/user/create/', review)
+        const response = await axios.post('http://api.driveby.charwin.tech/reviews/user/create/', review)
         return response.data
     }
     catch (error) {

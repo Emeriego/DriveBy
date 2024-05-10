@@ -38,7 +38,7 @@ const CreateUserReview = () => {
 
   const getUserById = async (user_id) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/users/${user_id}`)
+      const response = await axios.get(`http://api.driveby.charwin.tech/api/users/${user_id}`)
       const data = await response.data
       setUser(data)
     }

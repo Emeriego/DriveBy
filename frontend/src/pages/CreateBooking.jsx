@@ -62,7 +62,7 @@ const CreateBooking = () => {
   );
 
   const getCar = () => {
-    return axios.get(`http://localhost:8000/api/cars/${car_id}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
       .then((response) => {
         dispatch(carActions.fetchSelectedCar(response.data));
         setCar(response.data);
@@ -80,7 +80,7 @@ const CreateBooking = () => {
   }
 
   const getBookings = () => {
-    return axios.get(`http://localhost:8000/api/bookings/${car_id}`)
+    return axios.get(`http://api.driveby.charwin.tech/api/bookings/${car_id}`)
       .then((response) => {
         dispatch(bookingActions.fetchCarBookings(response.data));
         console.log("from getBookings", response.data)
@@ -175,7 +175,7 @@ const CreateBooking = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`http://localhost:8000/api/cars/book/${car_id}/`, {
+      const response = await axios.post(`http://api.driveby.charwin.tech/api/cars/book/${car_id}/`, {
         car_id: car_id,
         startDate: from,
         endDate: to,
@@ -336,7 +336,7 @@ const CreateBooking = () => {
       </div>
       <div className="right-pane">
         <div className="img-container">
-          <img src={`http://localhost:8000/${car.img}`}alt="" />
+          <img src={`http://api.driveby.charwin.tech/${car.img}`}alt="" />
         </div>
         <Flex gap="middle" horizontal>
           <Rate tooltips={desc} disabled value={car.rating} />

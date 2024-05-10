@@ -9,7 +9,7 @@ const BookingModal = ({bookingId, isBookModalOpen, setIsBookModalOpen}) => {
 
     const getBookingById = async(bookingId) => {
         try {
-          const response = await axios.get(`http://localhost:8000/api/bookings/${bookingId}/booking/`)
+          const response = await axios.get(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/booking/`)
           return await response.data
           // setCar(data)
         }
