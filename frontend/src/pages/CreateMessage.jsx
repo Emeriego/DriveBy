@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import {authActions} from '../store';
+import API_BASE_URL from '../utils/apiConfig';
+
 
 
 
@@ -39,7 +41,7 @@ const CreateMessage = () => {
     // console.log('searching for refteshed token:', access)
     try {
       // setLoading(true)
-      const res = await axios.post(`http://api.driveby.charwin.tech/api/messages/create/`, JSON.stringify(myData),
+      const res = await axios.post(`${API_BASE_URL}/api/messages/create/`, JSON.stringify(myData),
         {
           headers: {
             'Content-Type': 'application/json',

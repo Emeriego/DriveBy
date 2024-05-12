@@ -12,6 +12,8 @@ import axios from 'axios';
 import { bookingActions } from '../store';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import API_BASE_URL from '../utils/apiConfig';
+
 
 
 
@@ -28,9 +30,9 @@ const Home = () => {
     const [isFiltered, setIsFiltered] = React.useState(false);
 
     const getAllCars = () => {
-        return axios.get("http://api.driveby.charwin.tech/api/cars/")
+        return axios.get(`${API_BASE_URL}/api/cars/`)
             .then((response) => {
-                dispatch(carActions.fetchall(response.data));
+                dispatch(carActions.fetchall(response.data.reverse()));
                 // console.log(response.data)
             })
             .catch((error) => {
@@ -49,7 +51,7 @@ const Home = () => {
     }
 
     const getBookings = () => {
-        return axios.get(`http://api.driveby.charwin.tech/api/bookings/`)
+        return axios.get(`${API_BASE_URL}/api/bookings/`)
             .then((response) => {
                 dispatch(bookingActions.fetchAllBookings(response.data));
                 console.log("from getBookings", response.data)
@@ -103,7 +105,7 @@ const Home = () => {
                 Filteredlist = Filteredlist.filter(car => car.id != allBookings[i].car.id)
             }
         }
-        setFilteredCars(Filteredlist); // Update the filtered cars list
+        setFilteredCars(Filteredlist.reverse()); // Update the filtered cars list
         setIsFiltered(true); // Set flag to indicate that filtering is done
     };
 

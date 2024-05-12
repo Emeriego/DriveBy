@@ -27,6 +27,9 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+.header-wrapper .brand-name{
+    display: inline-block;
+}
 li a {
     display: flex;
     justify-content: space-between;
@@ -52,7 +55,54 @@ li a:hover {
     align-items: center;
     gap: 10px
 }
+.mobile-menu-wrapper {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-items: flex-start;
+    
+}
 /* .profile-dropdown {
     background-color: black;
     color: whitesmoke;
 } */
+/* @media  screen and (max-width: 400px) {
+    .brand-name{
+        display: hidden;
+    }
+} */
+@media screen and (max-width: 460px) {
+    .header-wrapper {
+        width: 90%;
+    }
+    .brand {
+        font-size: 1.2rem !important;
+    }
+    .header-wrapper .brand .brand-name {
+        display: none !important;
+    }
+    .menu, .right-menu{
+        display: none;
+    }
+    .header-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 10px;
+
+    }
+    .mobile-menu-wrapper {
+        display: flex;
+        align-items: flex-end;
+        
+    }
+    .mobile-menu{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

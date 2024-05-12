@@ -10,6 +10,8 @@ import Card from '../components/Card'
 import './Index.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import API_BASE_URL from '../utils/apiConfig';
+
 
 
 

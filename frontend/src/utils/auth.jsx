@@ -1,11 +1,11 @@
 import { jwtDecode } from "jwt-decode";
-
+import API_BASE_URL from "./apiConfig";
 
 
 let authenticateUser = async (email, password) => {
     // const navigate = useNavigate()
     // e.preventDefault()
-    let response = await fetch('http://api.driveby.charwin.tech/api/users/login/', {
+    let response = await fetch(`${API_BASE_URL}/api/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "email": email, "password": password })
@@ -33,7 +33,7 @@ let refreshToken = async (tokens) => {
 
         if (decodedToken.exp < currentTime) {
             try {
-                const response = await fetch('http://api.driveby.charwin.tech/api/login/refresh/', {
+                const response = await fetch(`${API_BASE_URL}/api/login/refresh/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const setRefreshTokens = async (dispatch, authActions) => {
 //             // Token has expired
 //             // console.log('Token has expired');
 
-//             fetch('http://api.driveby.charwin.tech/api/login/refresh/', {
+//             fetch('API_BASE_URL/login/refresh/', {
 //                 method: 'POST',
 //                 headers: {
 //                 'Content-Type': 'application/json',

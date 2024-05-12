@@ -9,6 +9,9 @@ import CarCard from '../components/CarCard';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { authActions } from '../store';
+import API_BASE_URL from '../utils/apiConfig';
+
+
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
 
@@ -39,7 +42,7 @@ const CreateCarReview = () => {
 
   const getCarById = async (car_id) => {
     try {
-      const response = await axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
+      const response = await axios.get(`${API_BASE_URL}/api/cars/${car_id}`)
       const data = await response.data
       setCar(data)
     }
@@ -93,15 +96,36 @@ const CreateCarReview = () => {
 
 
 
-    <div className="form-container">
-      {contextHolder}
-      <div className="left-pane">
-        {/* <div className="img-container">
-          <img src="./assets/van.webp" alt="" />
-        </div> */}
-        <CarCard car={car} />
-      </div>
-      <div className='right-pane' >
+ 
+
+
+
+
+<div className="form-container2">
+
+<div className="card car-card2 ">
+
+  <div className="card-left">
+    <div className="top">
+      <h3 className="card-title">{car.brand} </h3>
+      <hr />
+    </div>
+    <div className="car-img2">
+      <img data-aos='slide-up' src={`${API_BASE_URL}${car.img}`} className="card-img-top img" alt="..." />
+
+    </div>
+
+    <Flex gap="0" horizontal className='ratin'>
+      <Rate tooltips={desc} value={car.rating} className='rate' disabled />
+      {car.rating !== 0 ? <span className='rate'>{`${car.numReviews} reviews`}</span> : <small className='rate'> No reviews</small>}
+    </Flex>
+
+  </div>
+
+  <div data-aos='slide-up' className="card-body card-right ">
+    {/* <hr /> */}
+  
+   
 
         <form onSubmit={handleReview}>
           <h3>Review</h3>
@@ -115,7 +139,7 @@ const CreateCarReview = () => {
 
 
           </div>
-          <div className="row frm-rw2">
+          <div className="row frm">
             <div className="col">
               <textarea
                 onChange={(event) => setReview(event.target.value)}
@@ -132,8 +156,14 @@ const CreateCarReview = () => {
           <button type="submit" className="btn btn-primary">Review</button>
         </form>
 
-      </div>
+      
     </div>
+  </div>
+</div>
+
+
+
+
 
 
   )

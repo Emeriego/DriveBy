@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 // import emailjs from 'emailjs-com';
@@ -22,6 +22,9 @@ import { refreshToken } from '../utils/auth';
 import { authActions } from '../store';
 import SendEmail from '../utils/sendEmail';
 import '../utils/spin.css'
+import API_BASE_URL from '../utils/apiConfig';
+import './car.css'
+
 
 const CreateBooking = () => {
   const dispatch = useDispatch();
@@ -62,7 +65,7 @@ const CreateBooking = () => {
   );
 
   const getCar = () => {
-    return axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
+    return axios.get(`${API_BASE_URL}/api/cars/${car_id}`)
       .then((response) => {
         dispatch(carActions.fetchSelectedCar(response.data));
         setCar(response.data);
@@ -72,7 +75,7 @@ const CreateBooking = () => {
         console.error("catch in getcar:", "Error fetching cars:", error);
         errorMsg("Error fetching car")
         setTimeout(() => {
-        navigate('/')
+          navigate('/')
         }, 2000);
         // Handle the error as needed, such as displaying a message to the user
         throw error; // Rethrow the error to propagate it further if necessary
@@ -80,16 +83,16 @@ const CreateBooking = () => {
   }
 
   const getBookings = () => {
-    return axios.get(`http://api.driveby.charwin.tech/api/bookings/${car_id}`)
+    return axios.get(`${API_BASE_URL}/api/bookings/${car_id}`)
       .then((response) => {
         dispatch(bookingActions.fetchCarBookings(response.data));
         console.log("from getBookings", response.data)
       })
       .catch((error) => {
         console.error("Error fetching cars:", error);
-       errorMsg("Error fetching bookings")
-       setTimeout(() => {
-        navigate('/')
+        errorMsg("Error fetching bookings")
+        setTimeout(() => {
+          navigate('/')
         }, 2000);
         // Handle the error as needed, such as displaying a message to the user
         throw error; // Rethrow the error to propagate it further if necessary
@@ -150,7 +153,7 @@ const CreateBooking = () => {
         //   isEqual(toDate, bookingFrom)    // Check for exact match of requested end time and existing booking's start time
         // )
       ) {
-       errorMsg('Car is not available for booking at that time. Please select a different time.');
+        errorMsg('Car is not available for booking at that time. Please select a different time.');
         setIsAvailable(false); // Set availability to false
         return false;
       }
@@ -175,7 +178,7 @@ const CreateBooking = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`http://api.driveby.charwin.tech/api/cars/book/${car_id}/`, {
+      const response = await axios.post(`${API_BASE_URL}/api/cars/book/${car_id}/`, {
         car_id: car_id,
         startDate: from,
         endDate: to,
@@ -195,7 +198,7 @@ const CreateBooking = () => {
     } catch (error) {
       console.error("Error booking car:", error);
       setLoading(false);
-      
+
       errorMsg('Could not book car')
       // Handle the error as needed, such as displaying a message to the user
       throw error; // Rethrow the error to propagate it further if necessary
@@ -222,15 +225,17 @@ const CreateBooking = () => {
             JSON.stringify(localStorage.setItem('authToken', JSON.stringify(refreshedTokens)))
             const response = await BookCar(refreshedTokens.access)
             console.log('response from handleCreateBooking', response)
-            alert('Car has been booked successfully for the selected time:' + from + ' to ' + to);
+            successMsg('Car has been booked successfully for the selected time:' + from + ' to ' + to);
 
             const emailParams = {
-              to_name: 'Godwin',
+              to_name: car.user.username,
               from_name: 'DriveBuy',
-              message: "Hello your Car Toyota Camry just got booked. please visit your dashboard to accept the request.",
+              message: `Hello your Car ${car.brand} ${car.model} just got booked. please visit your dashboard to accept the request.`,
             };
             SendEmail(emailParams);
+            setTimeout(() => {
             navigate('/dashboard');
+            }, 3000);
             // emailjs.send("service_vndygpg","template_2lvalpa",{
             //   from_name: "DriveBuy",
             //   to_name: "Godwin",
@@ -276,73 +281,55 @@ const CreateBooking = () => {
     return <Spinner />;
   }
   return (
-    <div className="form-container">
-      {contextHolder}
-      <div className='right-pane' >
-        <div className="msgs">
+    <div className="form-container2">
+{contextHolder}
+      <div className="card car-card2 ">
 
-        </div>
-        <h3>Booking</h3>
-
-
-        <div className="row frm-rw">
-
-          <div justify='center' className='searchy'>
-            <Col span={18}><span>
-              <RangePicker className='date-picker' showTime={{ format: 'HH:mm' }} format="DD MM YYYY HH:mm" onOk={SetTimeSlot} />
-            </span></Col>
-            <Col span={6}><button className='search-btn' onClick={() => checkAvailability(to, from)}>Check</button></Col>
-          </div>
-          {/* <button className='btn' style={{color: 'red'}} onClick={() => checkAvailability(to, from)}>check availability</button> */}
-          <div className="selects">
-            <div className="start">from : {from}</div>
-            <div className="end"> To: {to}</div>
-          </div>
-          {
-            // isAvailable ? <div className="success">This car is available for the selected date</div> : <div className="error">This car is NOT available for the selected date</div>
-          }
-
-        </div>
-        {
-          msg.map((m, index) => (
-            <div key={index} className={`msg ${m.type}`}>{m.body}</div>
-          ))
-
-        }
-        <div className="row frm-rw">
-
-          <div className="col">
+        <div className="card-left">
+          <div className="top">
+            <h3 className="card-title">You are Booking {car.brand}  </h3>
             <hr />
+          </div>
+          <div className="car-img2">
+            <img data-aos='slide-up' src={`${API_BASE_URL}${car.img}`} className="card-img-top img" alt="..." />
 
-            <h5>Brand: <span><b>**</b>{car.brand}</span></h5>
-            <h5>Model: <span><b>**</b>{car.model}</span></h5>
-            <h5>Color: <span><b>**</b>{car.color}</span></h5>
-            <h5>Horse Power: <span><b>**</b>{car.power + "HP"}</span></h5>
-            <h5>Rate per Hour: <span><b>**</b>{car.price}</span></h5>
-            <h5>Posted By: <span><b>**</b>{car.user.username}</span></h5>
-            <h5>Number of Hours: <span><b>**</b>{totalHours}</span></h5>
-            <h5>Total Cost: <span><b>**</b>{totalHours * car.price}</span></h5>
+          </div>
 
+          <Flex gap="0" horizontal className='ratin'>
+            <Rate tooltips={desc} value={car.rating} className='rate' disabled />
+            {car.rating !== 0 ? <span className='rate'>{`${car.numReviews} reviews`}</span> : <small className='rate'> No reviews</small>}
+          </Flex>
 
+        </div>
 
+        <div data-aos='slide-up' className="card-body card-right ">
+          {/* <hr /> */}
+          
+            <div className='searchy2'>
+
+              <RangePicker className='date-picker' showTime={{ format: 'HH:mm' }} format="DD MM YYYY HH:mm" onOk={SetTimeSlot} />
+
+            </div>
+
+          <h5>Brand: <span><b>**</b>{car.brand}</span></h5>
+          <h5>Model: <span><b>**</b>{car.model}</span></h5>
+          <h5>Color: <span><b>**</b>{car.color}</span></h5>
+          <h5>Horse Power: <span><b>**</b>{car.power + "HP"}</span></h5>
+          <h5>Rate per Hour: <span><b>**</b>{car.price}</span></h5>
+          <h5>Posted By: <span><b>**</b>{car.user.username}</span></h5>
+          <h5>Number of Hours: <span><b>**</b>{totalHours}</span></h5>
+          <h5>Total Cost: <span><b>**</b>{totalHours * car.price}</span></h5>
+
+          <div className="btns2">
+            <button  onClick={() => checkAvailability(to, from)} className={`btn btn-primary`}>Check</button>
+
+            <button type="submit" onClick={handleCreateBooking} className={`btn btn-primary ${isAvailable ? "" : "disabled"}`}>Book</button>
 
           </div>
         </div>
-        <div className="google-login">
-          <span>See <a href="" className="google">Guide</a> to learn how it works</span>
-        </div>
-        <button type="submit" onClick={handleCreateBooking} className={`btn btn-primary ${isAvailable ? "" : "disabled"}`}>Book</button>
+      </div>
 
-      </div>
-      <div className="right-pane">
-        <div className="img-container">
-          <img src={`http://api.driveby.charwin.tech/${car.img}`}alt="" />
-        </div>
-        <Flex gap="middle" horizontal>
-          <Rate tooltips={desc} disabled value={car.rating} />
-          {car.rating ? <span>{desc[car.rating - 1]}</span> : null}
-        </Flex>
-      </div>
+
     </div>
 
   )

@@ -7,6 +7,7 @@ import { authActions } from '../store'
 import './signup.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import API_BASE_URL from '../utils/apiConfig'
 
 
 
@@ -70,7 +71,7 @@ const Signup = () => {
 
 
   const addUserToDB = async (email, password, username, phone, address, firstname, lastname) => {
-    const response = await fetch('http://api.driveby.charwin.tech/api/users/register/', {
+    const response = await fetch(`${API_BASE_URL}/api/users/register/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -142,6 +143,9 @@ const Signup = () => {
         setSuccess('')
       }, 10000)
       loginUser(email, password);
+      setTimeout(()=>{
+        navigate('/dashboard')
+      })
 
     } catch (error) {
       // Handle any errors
@@ -163,12 +167,12 @@ const Signup = () => {
 
   return (
     <div className="form-container">
-      <div className="left-pane">
-        <div className="img-container">
+      <div className="right-pane2">
+        <div className="img-container-signup">
           <img data-aos='slide-up' src="./assets/login.png" alt="" />
         </div>
       </div>
-      <div className='right-pane' >
+      <div className='left-pane' >
 
         <form onSubmit={registerUser}>
           <h3>Signup</h3>

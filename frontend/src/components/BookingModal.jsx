@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Modal, Button, Rate, Flex } from 'antd';
 import { useEffect } from 'react';
+import API_BASE_URL from '../utils/apiConfig';
 // import defaultImg from '../assets/default.jpeg'
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
@@ -9,7 +10,7 @@ const BookingModal = ({bookingId, isBookModalOpen, setIsBookModalOpen}) => {
 
     const getBookingById = async(bookingId) => {
         try {
-          const response = await axios.get(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/booking/`)
+          const response = await axios.get(`${API_BASE_URL}/api/bookings/${bookingId}/booking/`)
           return await response.data
           // setCar(data)
         }
@@ -69,17 +70,9 @@ const BookingModal = ({bookingId, isBookModalOpen, setIsBookModalOpen}) => {
               <div class="col">
                 <hr />
 
-                {/* <h5>Brand: <span><b>**</b>{book.car.brand}</span></h5>
-                <h5>Model: <span><b>**</b>{book.car.model}</span></h5>
-                <h5>Color: <span><b>**</b>{book.car.color}</span></h5>
-                <h5>Rate per Hour: <span><b>**</b>{book.car.price} </span></h5>
-                <h5>Posted By: <span><b>**</b>{book.car.user.username}</span></h5> */}
-                <h5>Number of Hours: <span><b>**</b>{}</span></h5>
-                <h5>Total Cost: <span><b>**</b>{ }</span></h5>
-
-
-
-
+               
+            
+           
               </div>
             </div>
 
@@ -93,8 +86,66 @@ const BookingModal = ({bookingId, isBookModalOpen, setIsBookModalOpen}) => {
             </Flex>
           </div>
         </div>
+
+
+
+
+
+
+      <div className="left-side">
+
+
+<div className="car-title">
+  <span><h4>{car.brand + " " + car.model}</h4></span>
+</div>
+
+
+
+<div className="img-container">
+  {/* <img src={`./assets/${car.img}`} alt="" /> */}
+  <Image
+    // width={500}
+    style={{ width: '100%', height: '100%' }}
+    // src={`./assets/${car.img}`}
+    src={`${API_BASE_URL}/${car.img}`} />
+</div>
+<div className="rate">
+
+  <Flex gap="middle" horizontal>
+    <Rate tooltips={desc} disabled value={car.rating} />
+    {car.rating ? <span>{desc[car.rating - 1]}</span> : null}
+  </Flex>
+</div>
+</div>
+<div className='right-p' >
+
+{/* <h3>View car</h3> */}
+
+
+<div className="row frm">
+
+  <div className="col">
+
+
+  </div>
+  <div className="google-login">
+    <span>See <a href="" className="google">Guide</a> to learn how it works</span>
+    <button onClick={goToBook} type="submit" className="btn btn-primary">Book</button>
+
+  </div>
+</div>
+
+
+</div>
       </Modal>
   )
 }
 
 export default BookingModal
+
+
+
+
+
+
+

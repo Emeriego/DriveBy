@@ -1,8 +1,12 @@
 import React from 'react'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+
+AOS.init();
 const Guide = () => {
   return (
-    <div className='guide-container' style={{width: '80%'}}>
+    <div className='guide-container' data-aos='slide-up' style={{width: '80%'}}>
 
       <header className="jumbotron text-center">
         <h1>DriveBuy - The Guide</h1>

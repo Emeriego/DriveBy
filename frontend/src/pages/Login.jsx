@@ -57,6 +57,7 @@ const Login = () => {
       const tokens = await authenticateUser(email, password);
       // Store access token and its expiration time in local storage
       localStorage.setItem('authToken', JSON.stringify(tokens));
+      console.log("logged in XXXXXX")
       dispatch(authActions.login(tokens));
       // Navigate after successful login
       successMsg('Login Successful')

@@ -4,7 +4,7 @@ import { reviewActions } from '../store'
 
 const getAllUserReviews = async () => {    
     try {
-        const response = await axios.get('http://api.driveby.charwin.tech/api/reviews/allusers/')
+        const response = await axios.get(`${API_BASE_URL}/reviews/allusers/`)
         return response.data
     }
     catch (error) {
@@ -55,7 +55,7 @@ const userReviews = async (user) => {
 
 const getAllCarReviews = async () => {
     try {
-        const response = await axios.get('http://api.driveby.charwin.tech/api/reviews/allcars/')
+        const response = await axios.get(`${API_BASE_URL}/reviews/allcars/`)
         return response.data
     }
     catch (error) {
@@ -68,7 +68,7 @@ const carRating = async (car) => {
 
     try {
         console.log('car-rated',car)
-        const carReviews = await axios.get(`http://api.driveby.charwin.tech/api/reviews/car/${car}/`)
+        const carReviews = await axios.get(`API_BASE_URL/reviews/car/${car}/`)
         return calculateRating(carReviews.data)
     }
     catch (error) {
@@ -93,7 +93,7 @@ const carReviews = async (car) => {
 const postCarReview = async (review, access) => {
     try {
         // console.log('before posting review at utilskkkkkkkkk',review, access)
-        const response = await axios.post('http://api.driveby.charwin.tech/api/cars/review/create/', JSON.stringify(review),
+        const response = await axios.post('API_BASE_URL/cars/review/create/', JSON.stringify(review),
             { headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${access}` 

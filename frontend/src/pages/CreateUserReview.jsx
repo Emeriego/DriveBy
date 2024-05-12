@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import CarCard from '../components/CarCard';
 import { useEffect } from 'react';
+import API_BASE_URL from '../utils/apiConfig';
+
 import axios from 'axios';
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
@@ -38,7 +40,7 @@ const CreateUserReview = () => {
 
   const getUserById = async (user_id) => {
     try {
-      const response = await axios.get(`http://api.driveby.charwin.tech/api/users/${user_id}`)
+      const response = await axios.get(`${API_BASE_URL}/api/users/${user_id}`)
       const data = await response.data
       setUser(data)
     }

@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../store';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import API_BASE_URL from '../utils/apiConfig';
 
 
 
@@ -46,7 +47,7 @@ const CreateCar = () => {
   //   return (
   //     <Upload
   //       name="file"
-  //       action="http://api.driveby.charwin.tech/api/upload"
+  //       action="${API_BASE_URL}/upload"
   //       headers={{
   //         Authorization: 'Bearer ' + String(loggedInToken)
   //       }}
@@ -77,7 +78,7 @@ const CreateCar = () => {
   // const createCar = async (access) => {
   //   try {
   //     // const tokens = JSON.parse(localStorage.getItem('authToken'))
-  //     const response = await fetch('http://api.driveby.charwin.tech/api/cars/create/', {
+  //     const response = await fetch('${API_BASE_URL}/cars/create/', {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -149,7 +150,7 @@ const CreateCar = () => {
       if (file) {
         formData.append('image', file);
       }
-      const response = await fetch('http://api.driveby.charwin.tech/api/cars/create/', {
+      const response = await fetch(`${API_BASE_URL}/api/cars/create/`, {
         method: 'POST',
         headers: {
           'Authorization': 'Bearer ' + String(access)
@@ -206,7 +207,7 @@ const CreateCar = () => {
 
   // const props = {
   //   name: 'file',
-  //   action: 'http://api.driveby.charwin.tech/api/cars/create/', // Change the action URL to your Django backend endpoint for creating cars
+  //   action: '${API_BASE_URL}/cars/create/', // Change the action URL to your Django backend endpoint for creating cars
   //   headers: {
   //     Authorization: `Bearer ${loggedInToken}`,
   //   },
@@ -241,12 +242,12 @@ const CreateCar = () => {
 
   return (
     <div className="form-container">
-      <div className="right-pane">
+      <div className="right-p">
         <div className="img-container">
           <img data-aos='slide-right' src="./assets/logo2.png" alt="" />
         </div>
       </div>
-      <div className='right-pane' >
+      <div className='left-p' >
 
         <form data-aos='slide-left' onSubmit={handleCreateCar} id='frm'>
           <h3>Post A Car</h3>
@@ -349,6 +350,7 @@ const CreateCar = () => {
         </form>
 
       </div>
+      
     </div>
 
   )

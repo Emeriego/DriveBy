@@ -14,6 +14,8 @@ import { set } from 'date-fns';
 import DefaultImg from './assets/default.jpeg';
 import BookingModal from '../components/BookingModal';
 import { SendOutlined } from '@ant-design/icons';
+import API_BASE_URL from '../utils/apiConfig';
+
 // import './profile.css';
 
 
@@ -41,6 +43,8 @@ const Dashboard = () => {
   const loggedInDetail = useSelector(state => state.auth.loggedInDetail)
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const [showSentMessages, setShowSentMessages] = useState(true)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
   // const { firstname, lastname, email, username, address} = loggedInDetail
   // console.log("from dashboard", loggedInDetail)
 
@@ -60,7 +64,17 @@ const Dashboard = () => {
   };
 
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 400);
+    };
 
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
 
 
@@ -70,7 +84,7 @@ const Dashboard = () => {
   // const getUserMessages = async (access) => {
   //   try {
   //     setLoading(true)
-  //     const res = await axios.get('http://api.driveby.charwin.tech/api/messages', {
+  //     const res = await axios.get('${API_BASE_URL}/messages', {
   //       headers: {
   //         'Content-Type': 'application/json',
   //         'Authorization': `Bearer ${access}`
@@ -87,7 +101,7 @@ const Dashboard = () => {
   //   }
   // }
   const getCarBookings = (car) => {
-    return axios.get(`http://api.driveby.charwin.tech/api/bookings/${car}`)
+    return axios.get(`${API_BASE_URL}/api/bookings/${car}`)
       .then((response) => {
         setCarBookings(response.data)
         // dispatch(bookingActions.fetchCarBookings(response.data));
@@ -105,7 +119,7 @@ const Dashboard = () => {
   const getUserBookings = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://api.driveby.charwin.tech/api/bookings/user/',
+      const res = await axios.get(`${API_BASE_URL}/api/bookings/user/`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -125,7 +139,7 @@ const Dashboard = () => {
   const getUserPostings = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://api.driveby.charwin.tech/api/cars/',
+      const res = await axios.get(`${API_BASE_URL}/api/cars/`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -178,7 +192,7 @@ const Dashboard = () => {
 
   const getBookingById = async (bookingId) => {
     try {
-      const response = await axios.get(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/booking/`)
+      const response = await axios.get(`${API_BASE_URL}/api/bookings/${bookingId}/booking/`)
       return await response.data
       // setCar(data)
     }
@@ -200,7 +214,7 @@ const Dashboard = () => {
   const confirmBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/confirm/`,
+      const res = await axios.post(`${API_BASE_URL}/api/bookings/${bookingId}/confirm/`,
         {
           method: 'POST',
           headers: {
@@ -220,7 +234,7 @@ const Dashboard = () => {
   const completeBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/complete/`,
+      const res = await axios.post(`${API_BASE_URL}/api/bookings/${bookingId}/complete/`,
         {
           method: 'POST',
           headers: {
@@ -241,7 +255,7 @@ const Dashboard = () => {
     console.log('searching for refteshed token:', access)
     try {
       setLoading(true)
-      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/reject/`,
+      const res = await axios.post(`${API_BASE_URL}/api/bookings/${bookingId}/reject/`,
         {
           method: 'POST',
           headers: {
@@ -260,7 +274,7 @@ const Dashboard = () => {
   const cancelBooking = async (access, bookingId) => {
     try {
       setLoading(true)
-      const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/cancel/`,
+      const res = await axios.post(`${API_BASE_URL}/api/bookings/${bookingId}/cancel/`,
         {
           method: 'POST',
           headers: {
@@ -413,7 +427,7 @@ const Dashboard = () => {
   const getUserMessages = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://api.driveby.charwin.tech/api/messages/',
+      const res = await axios.get(`${API_BASE_URL}/api/messages/`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -422,10 +436,10 @@ const Dashboard = () => {
         })
 
       let recieved = res.data.filter(message => {
-       
+
         return (message.receiver.username === loggedInDetail.username);
       });
-     
+
       // console.log('messages', res.data)
       setLoading(false)
       setMessages(recieved)
@@ -439,7 +453,7 @@ const Dashboard = () => {
   const getUserSentMessages = async (access) => {
     try {
       setLoading(true)
-      const res = await axios.get('http://api.driveby.charwin.tech/api/messages/sent/',
+      const res = await axios.get(`${API_BASE_URL}/api/messages/sent/`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -447,7 +461,7 @@ const Dashboard = () => {
           }
         })
 
-   
+
       let sent = res.data.filter(message => {
         return (message.sender.username === loggedInDetail.username);
       });
@@ -471,7 +485,7 @@ const Dashboard = () => {
   //   console.log('searching for refteshed token:', access)
   //   try {
   //     setLoading(true)
-  //     const res = await axios.post(`http://api.driveby.charwin.tech/api/bookings/${bookingId}/cancel/`,
+  //     const res = await axios.post(`${API_BASE_URL}/api/bookings/${bookingId}/cancel/`,
   //       {
   //         method: 'POST',
   //         headers: {
@@ -492,7 +506,15 @@ const Dashboard = () => {
 
   useEffect(() => {
 
-    setupDashboard()
+    const fetchDataInterval = setInterval(() => {
+      setupDashboard()
+    
+    }, 5000); 
+
+    return () => {
+      clearInterval(fetchDataInterval);
+    };
+    
 
 
   }, [])
@@ -501,17 +523,20 @@ const Dashboard = () => {
   return (
 
 
-    <div className="dashboard-container">
+    <div className="dashboard-container" data-aos='slide-up'>
       {contextHolder}
 
       <Row>
-        <Col className='d-col-left' span={20}>Dashboard</Col>
+        <Col className='d-col-left' span={`${isMobile? "24" : "20"}`}>Dashboard</Col>
         <Col className='d-col-right' span={4}>
           <div className="btns">
+            {
+              !isMobile &&
+              <Button onClick={() => { navigate('/profile') }} className='d-btn' type="primary" size="small">
+                View Profile
+              </Button>
+            }
 
-            <Button onClick={() => { navigate('/profile') }} className='d-btn' type="primary" size="small">
-              View Profile
-            </Button>
           </div>
 
         </Col>
@@ -520,9 +545,9 @@ const Dashboard = () => {
       <Divider orientation="left"><span className='d-toggle' onClick={() => setShowMessages(prev => !prev)}>{showMessages ? "Hide Messages" : "Show Messages"}</span><MessageOutlined /></Divider>
 
       <Row>
-        <Col className='d-col-left msgs' span={20}>
+        <Col className='d-col-left msgs' span={`${isMobile? 24 : 20}`}>
           {
-            showMessages && 
+            showMessages &&
 
             (messages.length > 0 ? messages.map((message, index) => {
               return (
@@ -558,17 +583,20 @@ const Dashboard = () => {
 
 
         </Col>
-        <Col span={4}>
-          <Button onClick={() => { navigate('/messages/create') }} className='d-btn' type="primary" size="small">
-            Send a Message
-          </Button>
-        </Col>
+        {!isMobile &&
+          <Col span={4}>
+            <Button onClick={() => { navigate('/messages/create') }} className='d-btn' type="primary" size="small">
+              Send a Message
+            </Button>
+          </Col>
+        }
+
       </Row>
       <Divider orientation="left"><span className='d-toggle' onClick={() => setShowSentMessages(prev => !prev)}>{showSentMessages ? "Hide Sent Messages" : "Show Sent Messages"}</span><SendOutlined /></Divider>
       <Row>
-        <Col className='d-col-left msgs' span={20}>
+        <Col className='d-col-left msgs' span={`${isMobile? 24 : 20}`}>
           {
-            showSentMessages && 
+            showSentMessages &&
 
             (sentMessages.length > 0 ? sentMessages.map((message, index) => {
               return (
@@ -604,17 +632,23 @@ const Dashboard = () => {
 
 
         </Col>
-        <Col span={4}>
+
+
+        {
+          !isMobile &&
+          <Col span={4}>
           <Button onClick={() => { navigate('/messages/create') }} className='d-btn' type="primary" size="small">
             Send a Message
           </Button>
         </Col>
+        }
+       
       </Row>
-      
+
       <Divider orientation="left"><span className='d-toggle' onClick={() => setShowBookings(prev => !prev)}>{showBookings ? "Hide Bookings" : "Show Bookings"}</span><BookOutlined /></Divider>
 
       <Row>
-        <Col span={20}>
+        <Col span={`${isMobile? 24 : 20}`}>
           {
             showBookings &&
 
@@ -628,13 +662,13 @@ const Dashboard = () => {
                         {
                           (booking.status === 'Pending' || booking.status === 'Confirmed') &&
 
-                          <Button onClick={() => {handleCancel(booking.id)  }} className='d-btn-cancel' type="primary" size="small">
+                          <Button onClick={() => { handleCancel(booking.id) }} className='d-btn-cancel' type="primary" size="small">
                             Cancel
                           </Button>
                         }
                         {(booking.status === 'Completed' || booking.status === 'Rejected') &&
 
-                          <Button onClick={() => { navToCarReview(booking.car.id)}} className='d-btn-review' type="primary" size="small">
+                          <Button onClick={() => { navToCarReview(booking.car.id) }} className='d-btn-review' type="primary" size="small">
                             Review
                           </Button>
                         }
@@ -690,8 +724,8 @@ const Dashboard = () => {
                       <h5>Color: <span><b>**</b>{book.car.color}</span></h5>
                       <h5>Rate per Hour: <span><b>**</b>{book.car.price} </span></h5>
                       <h5>Posted By: <span><b>**</b>{book.car.user.username}</span></h5>
-                      <h5>Number of Hours: <span><b>**</b>{ book.total_hours}</span></h5>
-                      <h5>Total Cost: <span><b>**</b>{ book.total_price}</span></h5>
+                      <h5>Number of Hours: <span><b>**</b>{book.total_hours}</span></h5>
+                      <h5>Total Cost: <span><b>**</b>{book.total_price}</span></h5>
 
 
 
@@ -705,7 +739,7 @@ const Dashboard = () => {
                     <img alt="" />
                   </div>
                   <Flex gap="middle" horizontal>
-                    <Rate tooltips={desc} value={book.car.rating}  disabled/>
+                    <Rate tooltips={desc} value={book.car.rating} disabled />
                   </Flex>
                 </div>
               </div>
@@ -714,23 +748,27 @@ const Dashboard = () => {
           }
 
         </Col>
-        <Col span={4}>
-          <Button onClick={() => { navigate(`/book/${1}`) }} className='d-btn' type="primary" size="small">
+        {
+          !isMobile &&
+          <Col span={4}>
+          <Button onClick={() => { navigate(`/home`) }} className='d-btn' type="primary" size="small">
             Book a Car
           </Button>
         </Col>
+        }
+     
       </Row>
       <Divider orientation="left"><span className='d-toggle' onClick={() => setShowPostings(prev => !prev)}>{showPostings ? "Hide Postings" : "Show Postings"}</span><CarOutlined /></Divider>
 
       <Row>
-        <Col span={20}>
+        <Col span={`${isMobile? 24 : 20}`}>
           {
             showPostings && <div className="card" style={{ width: "80%" }}>
               <ul className="list-group list-group-flush">
                 {
                   postings.length > 0 ?
                     postings.map((posting, index) => {
-                      return <li key={index} className="list-group-item" style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}><Link to={`/cars/${posting.id}`} >{posting.brand} {posting.model}</Link><Button onClick={() => showModal(posting.id)} size="small">View booking requests for this car</Button></li>
+                      return <li key={index} className="list-group-item" style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}><Link to={`/cars/${posting.id}`} >{posting.brand} {posting.model}</Link><Button onClick={() => showModal(posting.id)} size="small">View requests</Button></li>
                     }
                     )
                     : <li className="list-group-item">You have not posted any car yet</li>
@@ -743,11 +781,15 @@ const Dashboard = () => {
 
 
         </Col>
-        <Col span={4}>
+{
+          !isMobile &&
+          <Col span={4}>
           <Button onClick={() => { navigate('/createcar') }} className='d-btn' type="primary" size="small">
             Post a Car
           </Button>
         </Col>
+}
+      
       </Row>
       <Modal title="Bookings" open={isModalOpen} onOk={handleOk} footer={[
         <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
@@ -777,7 +819,7 @@ const Dashboard = () => {
 
                     </div>
                   }
-                         {
+                  {
                     booking.status === 'Canceled' && booking.car.user.id === loggedInDetail.id && <div>
                       <Button onClick={() => navToUserReview(booking.user.id)} size='small'>Review User</Button>
 

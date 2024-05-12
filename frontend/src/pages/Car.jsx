@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { carActions } from '../store';
 import defaultImg from './assets/default.jpeg'
 import '../utils/spin.css'
+import API_BASE_URL from '../utils/apiConfig';
+
 
 import './signup.css'
 
@@ -32,7 +34,7 @@ const Car = () => {
   );
 
   const getCar = () => {
-    return axios.get(`http://api.driveby.charwin.tech/api/cars/${car_id}`)
+    return axios.get(`${API_BASE_URL}/api/cars/${car_id}`)
       .then((response) => {
         dispatch(carActions.fetchSelectedCar(response.data));
         setCar(response.data);
@@ -66,32 +68,31 @@ const Car = () => {
 
   return (
     <div className="form-container">
-      <div className="left-pane">
+      <div className="left-p">
+      <Col span={16}><span>
+              <div className="car-title">
+                <span><h4>{car.brand + " " + car.model}</h4></span>
+              </div>
+            </span></Col>
         <div className="img-container">
           {/* <img src={`./assets/${car.img}`} alt="" /> */}
           <Image
             // width={500}
             style={{ width: '100%', height: '100%' }}
             // src={`./assets/${car.img}`}
-            src={`http://api.driveby.charwin.tech${car.img}`}          />
+            src={`${API_BASE_URL}/${car.img}`}          />
         </div>
-
+        <Flex gap="middle" horizontal>
+              <Rate tooltips={desc} disabled value={car.rating} />
+              {car.rating ? <span>{desc[car.rating - 1]}</span> : null}
+            </Flex>
       </div>
-      <div className='right-pane' >
+      <div className='right-p' >
 
         {/* <h3>View car</h3> */}
 
-        <div className="row frm-rw">
-          <div justify='center' className='searchy'>
-            <Col span={16}><span>
-              <div className="car-title">
-                <span><h4>{car.brand + " " + car.model}</h4></span>
-              </div>
-            </span></Col>
-          </div>
-
-        </div>
-        <div className="row frm-rw">
+  
+        <div className="row frm">
 
           <div className="col">
             <hr />
@@ -103,17 +104,15 @@ const Car = () => {
             <h5>Rate per Hour: <span><b>**</b>{car.price}</span></h5>
             <h5>Posted By: <span><b>**</b>{car.user.username}</span></h5>
 
-            <Flex gap="middle" horizontal>
-              <Rate tooltips={desc} disabled value={car.rating} />
-              {car.rating ? <span>{desc[car.rating - 1]}</span> : null}
-            </Flex>
+            
           </div>
-        </div>
-        <div className="google-login">
+          <div className="google-login">
           <span>See <a href="" className="google">Guide</a> to learn how it works</span>
           <button onClick={goToBook} type="submit" className="btn btn-primary">Book</button>
 
         </div>
+        </div>
+        
 
       </div>
     </div>
