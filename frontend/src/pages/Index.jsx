@@ -76,7 +76,7 @@ const index = () => {
 
                 </div>
             </div>
-            <div data-aos='slide-left' className="jumbotron">
+            <div data-aos='slide-left' className="jumbotron" style={{marginBottom: "100px"}}>
                 <h1 className="display-4">What to Know about DRIVEBY!</h1>
                 <p className="lead">We revolutionize transportation with our peer-to-peer car rental app. Easily rent vehicles from local owners, offering affordable and convenient options for short-term use. Seamlessly browse, book, and unlock cars, promoting sustainability and community sharing.</p>
                 <hr className="my-4" />
