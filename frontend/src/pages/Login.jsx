@@ -75,28 +75,47 @@ const Login = () => {
 
 
   return (
-    <div className="form-container">
-      {contextHolder}
-      <div className="right-pane">
-        <div className="img-container">
-          <img data-aos='slide-right' src="./assets/logo.png" alt="" />
-        </div>
-      </div>
-      <div className='right-pane' >
+  
 
-        <form data-aos='slide-left' onSubmit={loginUser}>
+
+
+
+
+
+
+<div className="form-container2">
+
+<div className="card car-card2 ">
+
+  <div className="card-left">
+    <div className="top">
+      <h3 className="card-title"> </h3>
+      <hr />
+    </div>
+    <div className="car-img2">
+      <img data-aos='slide-up'  src="./assets/logo.png" className="card-img-top img" alt="..." />
+
+    </div>
+
+
+  </div>
+
+  <div data-aos='slide-up' className="card-body card-right ">
+    {/* <hr /> */}
+  
+    <form className='frm-tag2' data-aos='slide-left' onSubmit={loginUser}>
           <h3>Login</h3>
 
 
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
-              <Input placeholder="Email" type='email' name='email' onChange={getEmail} prefix={<UserOutlined />} />
+              <Input placeholder="Email" type='email' name='email' onChange={getEmail} style={{marginBottom: '5px'}} prefix={<UserOutlined />} />
 
               {/* <input type="email" className="form-control" placeholder="Email" aria-label="Email" /> */}
             </div>
 
           </div>
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
               <Input.Password
                 placeholder="input password"
@@ -114,9 +133,11 @@ const Login = () => {
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
+  </div>
+</div>
 
-      </div>
-    </div>
+
+</div>
 
   )
 }

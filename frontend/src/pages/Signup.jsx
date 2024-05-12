@@ -164,17 +164,29 @@ const Signup = () => {
   };
 
 
-
   return (
-    <div className="form-container">
-      <div className="right-pane2">
-        <div className="img-container-signup">
-          <img data-aos='slide-up' src="./assets/login.png" alt="" />
-        </div>
-      </div>
-      <div className='left-pane' >
+    <div className="form-container2">
 
-        <form onSubmit={registerUser}>
+    <div className="card car-card2 " style={{marginBottom: '0px'}}>
+
+      <div className="card-left">
+        <div className="top">
+          <h3 className="card-title"> </h3>
+          <hr />
+        </div>
+        <div className="car-img2">
+          <img data-aos='slide-up' src="./assets/logo2.png"  className="card-img-top img" alt="..." />
+
+        </div>
+
+       
+
+      </div>
+
+      <div data-aos='slide-up' className="card-body card-right ">
+        {/* <hr /> */}
+      
+        <form className='frm-tag' onSubmit={registerUser}>
           <h3>Signup</h3>
           {error && <div className="alert alert-danger" role="alert">
             {error}
@@ -183,13 +195,13 @@ const Signup = () => {
             {success}
           </div>}
 
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
               <input type="email" onChange={getEmail} className="form-control" name='email' placeholder="Email" aria-label="Email" />
             </div>
 
           </div>
-          <div className="row frm-rw2">
+          <div className="row frm">
             <div className="col">
               <input type="text" onChange={getUsername} className="form-control" placeholder="Username" aria-label="Username" />
             </div>
@@ -198,7 +210,7 @@ const Signup = () => {
             </div>
 
           </div>
-          <div className="row frm-rw2">
+          <div className="row frm">
             <div className="col">
               <input type="password" onChange={getPassword} className="form-control" placeholder="Password" aria-label="Password" />
             </div>
@@ -207,24 +219,24 @@ const Signup = () => {
             </div>
 
           </div>
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
               <input type="text" onChange={getFirstname} className="form-control" placeholder="First name" aria-label="First name" />
             </div>
 
-          </div> <div className="row frm-rw">
+          </div> <div className="row frm">
             <div className="col">
               <input type="text" onChange={getLastname} className="form-control" placeholder="Last Name" aria-label="Last name" />
             </div>
 
           </div>
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
               <input type="text" onChange={getAddress} className="form-control" placeholder="Street Address" aria-label="Street Address" />
             </div>
 
           </div>
-          <div className="row frm-rw">
+          <div className="row frm">
             <div className="col">
               <input type="text" onChange={getCity} className="form-control" placeholder="City" aria-label="City" />
             </div>
@@ -236,9 +248,17 @@ const Signup = () => {
           </div>
           <button type="submit" className="btn btn-primary">Sign Up</button>
         </form>
-
       </div>
     </div>
+
+
+  </div>
+
+
+
+
+
+  
 
   )
 }

@@ -31,7 +31,7 @@ const index = () => {
                             <img data-aos='slide-right' src={Banner} width='300px' alt="" className="banner" />
 
                         </div>
-                        <div className="left-header">
+                        <div data-aos='slide-left' className="left-header">
                             <span className="hashtag">A Seamless Representation of Quality Rides</span>
                             <h2 className="bold-text">DRIVEBY <br /></h2>
                             <p className="text">
