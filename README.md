@@ -1,5 +1,5 @@
 
-# Peer-to-Peer Car Rental App
+# DriveBy, A Peer-to-Peer Car Rental App
 
 Welcome to the Peer-to-Peer Car Rental App! This project aims to create a platform where travelers can rent cars from local owners, providing a convenient and affordable transportation solution for both parties.
 
