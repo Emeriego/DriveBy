@@ -32,7 +32,7 @@ Have you ever found yourself in a new city, longing for the convenience of your 
 - *Database*: Firebase Realtime Database (for Node.js backend), PostgreSQL (for Django backend)
 - *Authentication*: Firebase Authentication
 - *Payment Processing*: Stripe API
-- *Deployment*: Heroku (Node.js backend), AWS (Django backend)
+- *Deployment*: Gunicorn - backend, Nginx - frontend
 
 ## Installation
 
@@ -102,4 +102,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Feel free to customize the sections and content to fit your project's specifics. Once you're done, save the file as README.md in the root directory of your project. Let me know if you need any further assistance!
