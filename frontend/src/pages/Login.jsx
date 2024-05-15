@@ -106,7 +106,6 @@ const Login = () => {
     <form className='frm-tag2' data-aos='slide-left' onSubmit={loginUser}>
           <h3>Login</h3>
 
-
           <div className="row frm">
             <div className="col">
               <Input placeholder="Email" type='email' name='email' onChange={getEmail} style={{marginBottom: '5px'}} prefix={<UserOutlined />} />
