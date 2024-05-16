@@ -29,7 +29,7 @@ Have you ever found yourself in a new city, longing for the convenience of your 
 
 - *Frontend*: ReactJS, Redux, CSS
 - *Backend*: Node.js, Express.js, Django
-- *Database*: Firebase Realtime Database (for Node.js backend), PostgreSQL (for Django backend)
+- *Database*: *Firebase Realtime Database (for Node.js backend), PostgreSQL (for Django backend)
 - *Authentication*: Firebase Authentication
 - *Payment Processing*: Stripe API
 - *Deployment*: Gunicorn - backend, Nginx - frontend
@@ -41,7 +41,7 @@ To run the Peer-to-Peer Car Rental App locally, follow these steps:
 1. Clone the repository:
 
    bash
-   git clone https://github.com/yourusername/peer-to-peer-car-rental-app.git
+   git clone https://github.com/Emeriego/DriveBy.git
    
 
 2. Navigate to the project directory:
@@ -76,7 +76,7 @@ To run the Peer-to-Peer Car Rental App locally, follow these steps:
      python manage.py runserver
      
 
-6. Open your browser and navigate to http://localhost:3000 to access the app.
+6. Open your browser and navigate to http://localhost:5173 to access the app.
 
 ## Usage
 
