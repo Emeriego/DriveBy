@@ -1,0 +1,5 @@
+# Find the process ID (PID) using the port
+lsof -i :3009
+
+# Kill the process
+kill -9 <PID>
