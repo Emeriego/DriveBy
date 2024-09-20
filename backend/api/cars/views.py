@@ -31,22 +31,28 @@ def getCar(request, pk):
     except Http404:
         return Response({"error": "Car not found"}, status=status.HTTP_404_NOT_FOUND)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createCar(request):
-    """Create car and handle image upload as well"""
+    """Create car and handle image upload as well, create category if not exists"""
     user = request.user
     data = request.data
 
     image_file = request.FILES.get('image')
 
+    # Check if the category exists or create it if it doesn't
+    category_name = data.get('category')
+    category, created = Category.objects.get_or_create(name=category_name)
+
+    # Create the car
     car = Car.objects.create(
         user=user,
         brand=data['brand'],
         model=data['model'],
         color=data['color'],
         price=data['price'],
-        category=Category.objects.get(name=data['category']),
+        category=category,
         location=data['location'],
         city=data['city'],
         power=data['power'],
@@ -59,6 +65,36 @@ def createCar(request):
 
     serializer = CarSerializer(car, many=False)
     return Response(serializer.data)
+
+
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def createCar(request):
+#     """Create car and handle image upload as well"""
+#     user = request.user
+#     data = request.data
+
+#     image_file = request.FILES.get('image')
+
+#     car = Car.objects.create(
+#         user=user,
+#         brand=data['brand'],
+#         model=data['model'],
+#         color=data['color'],
+#         price=data['price'],
+#         category=Category.objects.get(name=data['category']),
+#         location=data['location'],
+#         city=data['city'],
+#         power=data['power'],
+#         condition=data['condition'],
+#     )
+
+#     if image_file:
+#         car.img = image_file
+#         car.save()
+
+#     serializer = CarSerializer(car, many=False)
+#     return Response(serializer.data)
 
 
 
