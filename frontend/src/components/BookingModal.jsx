@@ -140,7 +140,6 @@ const BookingModal = ({bookingId, isBookModalOpen, setIsBookModalOpen}) => {
       </Modal>
   )
 }
-
 export default BookingModal
 
 

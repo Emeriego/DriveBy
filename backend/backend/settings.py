@@ -137,13 +137,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # The database name in Supabase is 'postgres'
+        'USER': 'postgres.yjhyvshvauyggmtphlvm',  # Use the user part of the connection string
+        'PASSWORD': 'Psalm27:#01',  # Replace with your actual password from the connection string
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Use the host from the connection string
+        'PORT': '6543',  # Use the port from the connection string
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

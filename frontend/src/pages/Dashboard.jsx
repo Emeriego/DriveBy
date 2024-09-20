@@ -80,26 +80,6 @@ const Dashboard = () => {
 
 
 
-
-  // const getUserMessages = async (access) => {
-  //   try {
-  //     setLoading(true)
-  //     const res = await axios.get('${API_BASE_URL}/messages', {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${access}`
-  //       }
-  //     })
-  //     console.log(res.data)
-  //     setLoading(false)
-  //     setMessages(res.data)
-
-  //   } catch (error) {
-  //     console.log(error)
-  //     setLoading(false)
-
-  //   }
-  // }
   const getCarBookings = (car) => {
     return axios.get(`${API_BASE_URL}/api/bookings/${car}`)
       .then((response) => {
@@ -465,6 +445,7 @@ const Dashboard = () => {
       let sent = res.data.filter(message => {
         return (message.sender.username === loggedInDetail.username);
       });
+    
       // console.log('messages', res.data)
       setLoading(false)
       setSentMessages(sent)

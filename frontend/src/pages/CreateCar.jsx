@@ -150,6 +150,7 @@ const CreateCar = () => {
       if (file) {
         formData.append('image', file);
       }
+      console.log("before create data", formData);
       const response = await fetch(`${API_BASE_URL}/api/cars/create/`, {
         method: 'POST',
         headers: {

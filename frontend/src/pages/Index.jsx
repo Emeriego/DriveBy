@@ -4,13 +4,10 @@ import Banner from '/assets/add1.png'
 import sc1 from '/assets/sc1.png'
 import sc2 from '/assets/sc2.png'
 import sc3 from '/assets/sc3.png'
-import sc4 from '/assets/sc4.png'
-import sc5 from '/assets/sc5.png'
 import Card from '../components/Card'
 import './Index.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import API_BASE_URL from '../utils/apiConfig';
 
 
 
