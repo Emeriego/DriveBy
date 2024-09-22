@@ -113,7 +113,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
 ]
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'driveby.urls'
 
 TEMPLATES = [
     {
@@ -131,7 +131,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'driveby.wsgi.application'
 
 
 # Database
