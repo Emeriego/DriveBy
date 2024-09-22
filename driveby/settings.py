@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-uzls(u8!l1*wztmaaqpt^33*dw=i)j-2%c@i@_2$2c3t)ip57i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['driveby.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
